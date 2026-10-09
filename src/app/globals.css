@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300..700;1,300..700&family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-emerald: #0E4D3F;
+    --color-gold: #C8A35F;
+    --color-ivory: #FCF9F4;
+    --color-cream: #F5F0E7;
+    --color-charcoal: #202722;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: #FCF9F4;
+    color: #202722;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: #FCF9F4;
+    color: #202722;
+    overflow-x: hidden;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  h1, h2, h3, h4, .font-serif {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  ::selection {
+    background-color: #0E4D3F;
+    color: #FCF9F4;
+  }
+
+  /* Focus outline styles for WCAG 2.2 AA accessibility */
+  :focus-visible {
+    outline: 2px solid #C8A35F;
+    outline-offset: 3px;
+  }
+}
+
+@layer utilities {
+  .border-gold-subtle {
+    border-color: rgba(200, 163, 95, 0.35);
+  }
+
+  .border-gold-fine {
+    border-color: rgba(200, 163, 95, 0.2);
+  }
+
+  .bg-ivory-gradient {
+    background: linear-gradient(180deg, #FCF9F4 0%, #F5F0E7 100%);
+  }
+
+  .bg-emerald-gradient {
+    background: linear-gradient(135deg, #09362C 0%, #0E4D3F 100%);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
