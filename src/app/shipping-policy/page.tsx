@@ -3,8 +3,11 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Shipping & Delivery Policy",
+  title: "Shipping & Delivery Policy | Bloom & Belle",
   description: "Information on domestic India and international shipping timelines, packaging, and order tracking.",
+  alternates: {
+    canonical: "https://bloomandbelle.in/shipping-policy",
+  },
 };
 
 export default function ShippingPolicyPage() {

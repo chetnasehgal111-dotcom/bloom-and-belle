@@ -8,14 +8,46 @@ import { InstagramIcon } from "@/components/ui/SocialIcons";
 import { MessageCircle, Mail, MapPin, Clock, Sparkles } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Contact Us & Styling Concierge",
+  title: "Contact Us & Personal Styling Concierge | Bloom & Belle",
   description:
-    "Get in touch with the Bloom & Belle customer care team or connect with our WhatsApp styling concierge for personalized assistance.",
+    "Get in touch with the Bloom & Belle customer care team or connect with our WhatsApp styling concierge for personalized sizing, fabric swatches, and styling assistance.",
+  alternates: {
+    canonical: "https://bloomandbelle.in/contact",
+  },
+  openGraph: {
+    title: "Connect with Bloom & Belle — Customer Care & Styling Concierge",
+    description: "Personal styling assistance, fabric swatch inquiries, and customer service.",
+    url: "https://bloomandbelle.in/contact",
+  },
 };
 
 export default function ContactPage() {
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://bloomandbelle.in",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Contact Us",
+        item: "https://bloomandbelle.in/contact",
+      },
+    ],
+  };
+
   return (
-    <div className="bg-brand-ivory min-h-screen">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <div className="bg-brand-ivory min-h-screen">
       {/* Header */}
       <section className="bg-brand-ivory-cream border-b border-brand-gold/20 py-12 sm:py-16 text-center">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
@@ -159,5 +191,6 @@ export default function ContactPage() {
         </div>
       </section>
     </div>
+    </>
   );
 }

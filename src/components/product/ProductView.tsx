@@ -18,6 +18,8 @@ import {
   Sparkles,
   Check,
   ChevronRight,
+  ChevronDown,
+  HelpCircle,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -30,6 +32,7 @@ export function ProductView({ product, relatedProducts }: ProductViewProps) {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState<string>(product.sizes[0]);
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   const activeImage = product.images[activeImageIndex] || product.images[0];
 
@@ -321,6 +324,65 @@ export function ProductView({ product, relatedProducts }: ProductViewProps) {
                   <li key={i}>{c}</li>
                 ))}
               </ul>
+            </div>
+
+            {/* Frequently Asked Questions (AEO & Shopper Guidance) */}
+            <div className="pt-4 border-t border-brand-gold/20">
+              <div className="flex items-center gap-2 mb-3">
+                <HelpCircle className="w-4 h-4 text-brand-gold" />
+                <h3 className="font-serif text-lg text-brand-emerald">
+                  Frequently Asked Questions About This Piece
+                </h3>
+              </div>
+
+              <div className="space-y-2">
+                {[
+                  {
+                    q: `Is the ${product.name} see-through or transparent?`,
+                    a: `No. This style is tailored from ${product.fabric} with a high-density weave rated as '${product.specs.transparency}'. It provides complete opaque coverage, eliminating the need for uncomfortable inner slips.`,
+                  },
+                  {
+                    q: `How does the sizing run for ${product.name}?`,
+                    a: `Our garments follow true Indian standard sizing with approximately 2 inches of breathing ease engineered around the bust and hips for effortless mobility. Our model is 5'7" wearing size M. For a closer fit, select your exact body measurement; for a relaxed look, stick to your regular size.`,
+                  },
+                  {
+                    q: `What body shapes does this silhouette flatter most?`,
+                    a: `This style is recommended for ${product.bodyShapeMatch.join(", ")} silhouettes due to its ${product.specs.fit.toLowerCase()} and ${product.specs.neckline.toLowerCase()} cut, which creates natural vertical balance without pulling.`,
+                  },
+                  {
+                    q: `Can I preview fabric swatches or get styling advice before ordering?`,
+                    a: `Yes! Our personal styling concierge is available directly on WhatsApp. You can request high-resolution fabric drape videos, custom measurement consultations, or coordinate recommendations from our team.`,
+                  },
+                ].map((faq, idx) => {
+                  const isOpen = openFaqIndex === idx;
+                  return (
+                    <div
+                      key={idx}
+                      className="bg-white border border-brand-gold/20 overflow-hidden transition-colors"
+                    >
+                      <button
+                        onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
+                        aria-expanded={isOpen}
+                        className="w-full text-left p-3.5 sm:p-4 flex items-center justify-between gap-3 text-xs sm:text-sm font-medium text-brand-emerald hover:text-brand-gold transition-colors"
+                      >
+                        <span>{faq.q}</span>
+                        <ChevronDown
+                          className={cn(
+                            "w-3.5 h-3.5 text-brand-gold shrink-0 transition-transform duration-300",
+                            isOpen ? "rotate-180" : ""
+                          )}
+                        />
+                      </button>
+
+                      {isOpen && (
+                        <div className="px-3.5 pb-4 sm:px-4 sm:pb-4 text-xs text-brand-charcoal/80 font-light leading-relaxed border-t border-brand-gold/10 pt-2.5">
+                          {faq.a}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>

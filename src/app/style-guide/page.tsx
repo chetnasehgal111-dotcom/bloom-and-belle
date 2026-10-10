@@ -9,14 +9,80 @@ import { Button } from "@/components/ui/Button";
 import { Sparkles, CheckCircle2, ArrowRight, Lightbulb } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Interactive Style & Body Shape Guide",
+  title: "Body Shape Styling Guide & Indian Capsule Wardrobe | Bloom & Belle",
   description:
-    "Style smarter, not harder. Discover how to style your body shape—Pear, Hourglass, Apple, or Rectangle—with Bloom & Belle's curated western and ethnic capsules.",
+    "Master styling for Pear, Hourglass, Apple, and Rectangle body types with Bloom & Belle. Learn our 5-piece western & ethnic capsule formula for effortless daily dressing.",
+  alternates: {
+    canonical: "https://bloomandbelle.in/style-guide",
+  },
+  openGraph: {
+    title: "Bloom & Belle Body Shape Guide & Capsule Wardrobe",
+    description: "Style smarter, not harder. Discover tailored recommendations for your natural proportions.",
+    url: "https://bloomandbelle.in/style-guide",
+    images: ["/editorial/capsule-flatlay.png"],
+  },
 };
 
 export default function StyleGuidePage() {
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://bloomandbelle.in",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Style Guide",
+        item: "https://bloomandbelle.in/style-guide",
+      },
+    ],
+  };
+
+  const howToJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: "How to Style Your Body Shape with Western and Ethnic Wear",
+    description:
+      "A complete guide by Bloom & Belle to choosing balanced necklines, tailored trousers, and flattering kurtis for your specific silhouette.",
+    image: "https://bloomandbelle.in/editorial/capsule-flatlay.png",
+    step: [
+      {
+        "@type": "HowToStep",
+        name: "Identify Your Body Shape",
+        text: "Determine whether your proportions align with Pear (wider hips), Hourglass (defined waist), Apple (fuller midsection), or Rectangle (athletic balance).",
+        url: "https://bloomandbelle.in/style-guide#shapes",
+      },
+      {
+        "@type": "HowToStep",
+        name: "Balance Proportions with Flattering Silhouettes",
+        text: "Pair boat necks and A-line kurtis for Pear shapes, wrap styles for Hourglass, V-necks and straight silhouettes for Apple, and peplum cuts for Rectangle shapes.",
+        url: "https://bloomandbelle.in/style-guide#shapes",
+      },
+      {
+        "@type": "HowToStep",
+        name: "Formulate a 5-Piece Capsule Wardrobe",
+        text: "Combine 1 crisp button shirt, 1 tailored trouser, 1 breathable everyday kurti, 1 co-ord set, and 1 structure blazer to generate 10+ distinct outfits.",
+        url: "https://bloomandbelle.in/style-guide#capsule",
+      },
+    ],
+  };
+
   return (
-    <div className="bg-brand-ivory min-h-screen">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
+      />
+      <div className="bg-brand-ivory min-h-screen">
       {/* Page Header */}
       <section className="bg-brand-ivory-cream border-b border-brand-gold/20 py-12 sm:py-16 text-center">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
@@ -229,5 +295,6 @@ export default function StyleGuidePage() {
         </div>
       </section>
     </div>
+    </>
   );
 }

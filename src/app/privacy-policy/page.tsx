@@ -4,8 +4,11 @@ import { Metadata } from "next";
 import { BRAND_INFO } from "@/data/brand";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy",
+  title: "Privacy Policy | Bloom & Belle",
   description: "Privacy policy detailing how Bloom & Belle collects, uses, and protects customer information.",
+  alternates: {
+    canonical: "https://bloomandbelle.in/privacy-policy",
+  },
 };
 
 export default function PrivacyPolicyPage() {

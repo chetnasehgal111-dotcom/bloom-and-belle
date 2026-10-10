@@ -4,8 +4,11 @@ import { Metadata } from "next";
 import { BRAND_INFO } from "@/data/brand";
 
 export const metadata: Metadata = {
-  title: "Terms and Conditions",
+  title: "Terms and Conditions | Bloom & Belle",
   description: "Terms and Conditions governing the use of Bloom & Belle website, lead generation forms, and services.",
+  alternates: {
+    canonical: "https://bloomandbelle.in/terms-and-conditions",
+  },
 };
 
 export default function TermsAndConditionsPage() {

@@ -7,22 +7,30 @@ import { BRAND_INFO } from "@/data/brand";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://bloomandbelle.in"),
+  alternates: {
+    canonical: "https://bloomandbelle.in",
+  },
   title: {
     default: "Bloom & Belle | For Every Version of You — Contemporary Western & Ethnic Wear",
     template: "%s | Bloom & Belle",
   },
   description:
-    "Bloom & Belle offers premium contemporary women's fashion combining western and ethnic styles with quality-conscious fabrics at accessible prices. Explore kurtis, suits, tops, co-ord sets, and more.",
+    "Bloom & Belle offers premium contemporary women's fashion combining western and ethnic styles with 160+ GSM quality-conscious fabrics at accessible prices. Explore kurtis, suits, tops, co-ord sets, and more.",
   keywords: [
     "women's clothing online",
     "western wear for women",
     "ethnic wear for women",
     "kurtis for office",
-    "women's tops",
-    "co-ord sets",
-    "party wear suits",
+    "non sheer white kurti",
+    "160 GSM cotton clothing",
+    "contemporary Indian fashion",
+    "women's tops and shirts",
+    "co-ord sets for women",
+    "chanderi silk party wear suits",
+    "capsule wardrobe women India",
     "Bloom and Belle",
     "affordable luxury clothing India",
+    "body shape styling women",
   ],
   authors: [{ name: "Bloom & Belle" }],
   creator: "Bloom & Belle",
@@ -34,7 +42,7 @@ export const metadata: Metadata = {
     siteName: "Bloom & Belle",
     title: "Bloom & Belle | For Every Version of You",
     description:
-      "Style that fits you, your vibe & your budget. Contemporary western silhouettes and timeless ethnic elegance.",
+      "Style that fits you, your vibe & your budget. Contemporary western silhouettes and timeless ethnic elegance with 160+ GSM non-sheer fabrics.",
     images: [
       {
         url: "/editorial/ad-hero.png",
@@ -54,6 +62,13 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
   icons: {
     icon: "/brand/monogram.png",
@@ -77,9 +92,26 @@ export default function RootLayout({
         logo: "https://bloomandbelle.in/brand/logo-full.png",
         slogan: BRAND_INFO.tagline,
         description: BRAND_INFO.philosophyShort,
+        knowsAbout: [
+          "Women's Western Fashion",
+          "Indian Ethnic Wear",
+          "160+ GSM Non-Sheer Cotton Fabrics",
+          "Contemporary Co-ord Sets",
+          "Body Shape Styling Guides",
+          "Capsule Wardrobe Formulation",
+        ],
+        brand: {
+          "@type": "Brand",
+          name: "Bloom & Belle",
+          slogan: BRAND_INFO.tagline,
+        },
+        address: {
+          "@type": "PostalAddress",
+          addressCountry: "IN",
+        },
         contactPoint: {
           "@type": "ContactPoint",
-          contactType: "Customer Support",
+          contactType: "Customer Support & Styling Concierge",
           email: BRAND_INFO.social.supportEmail,
           telephone: BRAND_INFO.social.whatsappNumber,
           areaServed: ["IN", "US", "CA", "GB", "AE", "AU"],
@@ -95,6 +127,7 @@ export default function RootLayout({
         "@id": "https://bloomandbelle.in/#website",
         url: "https://bloomandbelle.in",
         name: "Bloom & Belle",
+        description: "Official online brand presence for Bloom & Belle — contemporary western and ethnic fashion for women.",
         publisher: {
           "@id": "https://bloomandbelle.in/#organization",
         },

@@ -33,9 +33,46 @@ export async function generateMetadata({
     };
   }
 
+  const titles: Record<string, string> = {
+    "western-wear": "Western Wear for Women | Non-Sheer Tops, Shirts & Trousers | Bloom & Belle",
+    "ethnic-wear": "Ethnic Wear for Women | Handcrafted Chanderi & Cotton Kurtis | Bloom & Belle",
+    "co-ord-sets": "Women's Co-ord Sets | Chic Workwear & Weekend Matching Sets | Bloom & Belle",
+    jewellery: "Demi-Fine Jewellery | 18k Champagne Gold Essentials | Bloom & Belle",
+  };
+
+  const descriptions: Record<string, string> = {
+    "western-wear":
+      "Explore contemporary western wear crafted with 160+ GSM non-sheer weaves. Thoughtfully tailored blouses, shirts, and versatile bottoms for modern women.",
+    "ethnic-wear":
+      "Discover artisanal ethnic kurtis, breathable Chanderi suits, and festive ensembles tailored with 2-inch comfort ease at accessible prices.",
+    "co-ord-sets":
+      "Shop versatile two-piece co-ord sets designed to transition seamlessly from boardroom meetings to evening dinners.",
+    jewellery:
+      "Preview Bloom & Belle's upcoming collection of 18k champagne gold demi-fine jewellery, designed to elevate western and ethnic silhouettes.",
+  };
+
+  const title = titles[slug] || `${category.name} Collection | Bloom & Belle`;
+  const description = descriptions[slug] || category.description;
+
   return {
-    title: `${category.name} Collection`,
-    description: category.description,
+    title,
+    description,
+    alternates: {
+      canonical: `https://bloomandbelle.in/collections/${slug}`,
+    },
+    openGraph: {
+      title,
+      description,
+      url: `https://bloomandbelle.in/collections/${slug}`,
+      images: [
+        {
+          url: category.heroImage,
+          width: 1200,
+          height: 630,
+          alt: `${category.name} Collection - Bloom & Belle`,
+        },
+      ],
+    },
   };
 }
 
@@ -49,8 +86,61 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
   const categoryProducts = PRODUCTS.filter((p) => p.category === slug);
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://bloomandbelle.in",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Collections",
+        item: "https://bloomandbelle.in/collections",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: category.name,
+        item: `https://bloomandbelle.in/collections/${slug}`,
+      },
+    ],
+  };
+
+  const collectionJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: category.name,
+    description: category.description,
+    url: `https://bloomandbelle.in/collections/${slug}`,
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: categoryProducts.length,
+      itemListElement: categoryProducts.map((p, idx) => ({
+        "@type": "ListItem",
+        position: idx + 1,
+        name: p.name,
+        image: `https://bloomandbelle.in${p.images[0].src}`,
+        url: `https://bloomandbelle.in/products/${p.slug}`,
+      })),
+    },
+  };
+
   return (
-    <div className="bg-brand-ivory min-h-screen">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }}
+      />
+      <div className="bg-brand-ivory min-h-screen">
       {/* Category Hero Banner */}
       <section className="relative overflow-hidden bg-brand-emerald text-brand-ivory py-16 sm:py-24 border-b border-brand-gold/30">
         <div className="absolute inset-0 opacity-25">
@@ -210,5 +300,6 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         </div>
       </section>
     </div>
+    </>
   );
 }

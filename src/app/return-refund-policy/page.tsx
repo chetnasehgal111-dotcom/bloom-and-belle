@@ -4,8 +4,11 @@ import { Metadata } from "next";
 import { BRAND_INFO } from "@/data/brand";
 
 export const metadata: Metadata = {
-  title: "Return & Exchange Policy",
+  title: "Return & Exchange Policy | Bloom & Belle",
   description: "Information on our hassle-free 7-day size exchange and returns process at Bloom & Belle.",
+  alternates: {
+    canonical: "https://bloomandbelle.in/return-refund-policy",
+  },
 };
 
 export default function ReturnRefundPolicyPage() {

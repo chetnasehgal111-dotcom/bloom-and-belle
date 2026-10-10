@@ -9,9 +9,18 @@ import { Button } from "@/components/ui/Button";
 import { Diamond, Sparkles, Globe, Heart, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "About Our Story & Philosophy",
+  title: "About Our Story & Philosophy | Bloom & Belle",
   description:
-    "Learn about Bloom & Belle, our design philosophy, and our commitment to premium-weight fabrics and accessible contemporary fashion.",
+    "Learn about Bloom & Belle, our design philosophy, and our commitment to 160+ GSM non-sheer fabrics, thoughtful Indian tailoring, and accessible contemporary fashion.",
+  alternates: {
+    canonical: "https://bloomandbelle.in/about",
+  },
+  openGraph: {
+    title: "About Bloom & Belle — For Every Version of You",
+    description: "The story behind our fusion of western silhouettes and timeless Indian ethnic grace.",
+    url: "https://bloomandbelle.in/about",
+    images: ["/editorial/moodboard.png"],
+  },
 };
 
 export default function AboutPage() {
@@ -22,8 +31,32 @@ export default function AboutPage() {
     heart: Heart,
   };
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://bloomandbelle.in",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "About Us",
+        item: "https://bloomandbelle.in/about",
+      },
+    ],
+  };
+
   return (
-    <div className="bg-brand-ivory min-h-screen">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <div className="bg-brand-ivory min-h-screen">
       {/* Page Header */}
       <section className="bg-brand-ivory-cream border-b border-brand-gold/20 py-12 sm:py-16 text-center">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
@@ -240,5 +273,6 @@ export default function AboutPage() {
         </div>
       </section>
     </div>
+    </>
   );
 }
